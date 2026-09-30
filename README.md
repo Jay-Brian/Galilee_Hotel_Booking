@@ -37,7 +37,7 @@ The system is built to provide a simple, organized, and convenient booking exper
 - Manage promotional banners and links through Django Admin
 - Control promotion order and visibility
 
-### Django Admin
+### Django Admin 
 - Manage reservations
 - Manage room types and individual rooms
 - Manage room images
@@ -91,7 +91,7 @@ The system is built to provide a simple, organized, and convenient booking exper
 - **Vercel** - frontend deployment
 - **Render** - backend deployment
 
----
+--- 
 
 ## Project Structure
 
