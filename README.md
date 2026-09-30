@@ -1,4 +1,4 @@
-#Web-Based Hotel Booking System for Galilee Hotel
+Web-Based Hotel Booking System for Galilee Hotel
 
 A web-based hotel booking system for Galilee Hotel that replaces the traditional manual booking process with a digital platform where guests can browse rooms, check availability, make reservations, manage their bookings, and view hotel offers.
 
