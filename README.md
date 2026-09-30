@@ -55,10 +55,10 @@ The system is built to provide a simple, organized, and convenient booking exper
 |---|---|
 | De Leon, Kurt Christian T. | Project Manager |
 | Santiago, Neil Ryann T. | UI/UX Designer |
-| Tadeo, Brent Garreth G. | UI/UX Designer |
-| Sumagaysay, John Michael O. | Frontend Developer / Researcher |
-| Dy, Jay Brian M. | Frontend Developer |
-| Santiago, Carl Emmanuel M. | Documentation / Tester |
+| Tadeo, Brent Garreth G. | Documentation |
+| Sumagaysay, John Michael O. | Researcher |
+| Dy, Jay Brian M. | Developer |
+| Santiago, Carl Emmanuel M. | Tester |
 
 ---
 
