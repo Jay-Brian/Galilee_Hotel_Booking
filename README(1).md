@@ -153,7 +153,7 @@ The Django backend will normally run at:
 http://localhost:8000/
 ```
 
-The Django Admin is available at:
+The Django Admin is available at: 
 
 ```text
 http://localhost:8000/admin/
