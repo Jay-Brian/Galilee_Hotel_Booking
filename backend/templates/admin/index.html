@@ -1,0 +1,134 @@
+{% extends "admin/index.html" %}
+
+{% block coltype %}colM{% endblock %}
+{% block content_title %}{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block nav-sidebar %}{% include "admin/gm_sidebar.html" %}{% endblock %}
+
+{% block content %}
+
+<div class="gm-stats">
+  <div class="gm-stat">
+    <div>
+      <p class="gm-stat-label">Checked In</p>
+      <p class="gm-stat-value">{{ dashboard_stats.checked_in }}</p>
+    </div>
+    <span class="gm-ico-badge gm-tone-blue" style="--ico: var(--i-usercheck)"></span>
+  </div>
+
+  <div class="gm-stat">
+    <div>
+      <p class="gm-stat-label">Pending Confirmation</p>
+      <p class="gm-stat-value">{{ dashboard_stats.pending }}</p>
+    </div>
+    <span class="gm-ico-badge gm-tone-amber" style="--ico: var(--i-clock)"></span>
+  </div>
+
+  <div class="gm-stat">
+    <div>
+      <p class="gm-stat-label">Confirmed</p>
+      <p class="gm-stat-value">{{ dashboard_stats.confirmed }}</p>
+    </div>
+    <span class="gm-ico-badge gm-tone-green" style="--ico: var(--i-check)"></span>
+  </div>
+
+  <div class="gm-stat">
+    <div>
+      <p class="gm-stat-label">Check-ins Today</p>
+      <p class="gm-stat-value">{{ dashboard_stats.checkins_today }}</p>
+    </div>
+    <span class="gm-ico-badge gm-tone-navy" style="--ico: var(--i-login)"></span>
+  </div>
+
+  <div class="gm-stat">
+    <div>
+      <p class="gm-stat-label">Check-outs Today</p>
+      <p class="gm-stat-value">{{ dashboard_stats.checkouts_today }}</p>
+    </div>
+    <span class="gm-ico-badge gm-tone-navy" style="--ico: var(--i-logout)"></span>
+  </div>
+
+  <div class="gm-stat">
+    <div>
+      <p class="gm-stat-label">Rooms Available Today</p>
+      <p class="gm-stat-value">{{ dashboard_stats.available_today }} <small>/ {{ dashboard_stats.total_rooms }}</small></p>
+    </div>
+    <span class="gm-ico-badge gm-tone-gold" style="--ico: var(--i-bed)"></span>
+  </div>
+
+  <div class="gm-stat">
+    <div>
+      <p class="gm-stat-label">Room Occupancy</p>
+      <p class="gm-stat-value">{% widthratio dashboard_stats.occupied_today dashboard_stats.total_rooms 100 %}%</p>
+    </div>
+    <span class="gm-ico-badge gm-tone-blue" style="--ico: var(--i-percent)"></span>
+  </div>
+</div>
+
+<div class="gm-dash-grid">
+
+  {% if perms.bookings.view_reservation or perms.bookings.change_reservation %}
+  <div class="gm-card">
+    <div class="gm-card-head">
+      <h3>Recent Activity</h3>
+      <div class="gm-head-actions">
+        {% if perms.bookings.add_reservation %}
+          <a class="gm-btn" href="{% url 'admin:bookings_reservation_add' %}">New reservation</a>
+        {% endif %}
+        <a href="{% url 'admin:bookings_reservation_changelist' %}">View all</a>
+      </div>
+    </div>
+    <div class="gm-table-wrap">
+      <table class="gm-table">
+        <thead>
+          <tr>
+            <th>Guest name</th>
+            <th>Room type</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in recent_reservations %}
+          <tr>
+            <td><strong>{{ r.guest_name }}</strong></td>
+            <td>{{ r.room_type.name }}</td>
+            <td>₱{{ r.total_price|floatformat:"2g" }}</td>
+            <td><span class="gm-badge gm-badge-{{ r.status }}">{{ r.get_status_display }}</span></td>
+            <td class="gm-actions"><a class="gm-eye" href="{% url 'admin:bookings_reservation_change' r.pk %}" title="Open reservation"></a></td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="5" class="gm-empty-cell">No reservations yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="gm-card">
+    <div class="gm-card-head gm-stack">
+      <h3>Quick Room Status</h3>
+      <div class="gm-legend">
+        <span class="gm-dot-available">Available</span>
+        <span class="gm-dot-reserved">Reserved</span>
+        <span class="gm-dot-occupied">Occupied</span>
+      </div>
+    </div>
+    <div class="gm-room-grid">
+      {% for room in room_grid %}
+        <div class="gm-room">
+          <strong>{{ room.number }}</strong>
+          <span class="gm-badge gm-badge-{{ room.state }}">{{ room.state|capfirst }}</span>
+          <small>{{ room.type }}</small>
+        </div>
+      {% empty %}
+        <p class="gm-empty">No rooms yet. Add room numbers under Room types.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
