@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block dark-mode-vars %}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'bookings/css/galilee-admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<span class="gm-panel-title">Admin Dashboard</span>
+{% endblock %}
+
+{% block usertools %}
+{% if has_permission %}
+<div class="gm-user-chip">
+  <span class="gm-avatar">{{ user.get_username|slice:":1"|upper }}</span>
+  <span>{% firstof user.get_short_name user.get_username %}</span>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block nav-sidebar %}{% include "admin/gm_sidebar.html" %}{% endblock %}
